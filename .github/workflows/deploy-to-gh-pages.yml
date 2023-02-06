@@ -1,0 +1,16 @@
+name: deploy-to-gh-pages
+on: [push]
+permissions:
+  contents: write
+jobs:
+  deploy-to-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: npm ci && npm test && npm run build-only:gh-pages
+
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build
