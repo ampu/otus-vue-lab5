@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div
-      v-for="flash of flashes"
+      v-for="flash of flashStore.flashes"
       :key="flash.id"
       class="alert alert-dismissible fade show"
       :class="`alert-${flash.status}`"
@@ -11,7 +11,7 @@
         class="btn btn-close"
         data-bs-dismiss="alert"
         aria-label="Close"
-        @click="removeFlash(flash)"
+        @click="flashStore.removeFlash(flash)"
       />
       {{ flash.message }}
     </div>
@@ -19,12 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import {computed} from 'vue'
-
 import {useFlashStore} from '@/stores/flash-store'
-const {getFlashes, removeFlash} = useFlashStore()
 
-const flashes = computed(getFlashes)
+const flashStore = useFlashStore()
 </script>
 
 <style lang="scss" scoped>

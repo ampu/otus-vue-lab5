@@ -1,16 +1,16 @@
-import {ref} from 'vue'
+import {computed, ref} from 'vue'
 import {defineStore} from 'pinia'
 
 import type {BookFilterModel, BookModel} from '@/helpers/book-types'
 import bookClient from '@/clients/book-client'
 import {useAuthorStore} from '@/stores/author-store'
-import {OpStatus} from '@/helpers/op-types'
+import {getStatuses, OpStatus} from '@/helpers/op-types'
 
 export const useBookStore = defineStore(`book`, () => {
   const fetchStatus = ref(OpStatus.NONE)
   const books = ref([] as BookModel[])
 
-  const getFetchStatus = () => fetchStatus.value
+  const fetchStatuses = computed(() => getStatuses(fetchStatus.value))
 
   const getBook = (bookId: string) => {
     return books.value.find((book) => book.id === bookId)
@@ -63,8 +63,8 @@ export const useBookStore = defineStore(`book`, () => {
       const {books, authors} = await bookClient.getBooks(`vue.js`)
       books.forEach(addBook)
 
-      const {addAuthor} = useAuthorStore()
-      authors.forEach(addAuthor)
+      const authorStore = useAuthorStore()
+      authors.forEach(authorStore.addAuthor)
       fetchStatus.value = OpStatus.SUCCESS
     } catch (err) {
       fetchStatus.value = OpStatus.ERROR
@@ -73,13 +73,14 @@ export const useBookStore = defineStore(`book`, () => {
   }
 
   return {
+    fetchStatus,
+    fetchStatuses,
     books,
     getBook,
     addBook,
     updateBook,
     removeBook,
     getBooks,
-    getFetchStatus,
     fetchBooks,
   }
 })

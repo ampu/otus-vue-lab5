@@ -20,7 +20,6 @@ import BookForm from '@/components/book/BookForm.vue'
 import {useBookStore} from '@/stores/book-store'
 import {useFlashStore} from '@/stores/flash-store'
 import type {BookModel} from '@/helpers/book-types'
-import {OpStatus} from '@/helpers/op-types'
 import {goToFullPath, goToNotFound} from '@/helpers/navigation-helpers'
 import {FlashStatus} from '@/helpers/flash-types'
 
@@ -30,21 +29,20 @@ const props = defineProps<{
 
 const router = useRouter()
 const route = useRoute()
-const {getBook, getFetchStatus} = useBookStore()
-const {addFlash} = useFlashStore()
-const book = computed(() => getBook(props.bookId))
-const fetchStatus = computed(getFetchStatus)
-const {updateBook} = useBookStore()
+const bookStore = useBookStore()
+const flashStore = useFlashStore()
+const book = computed(() => bookStore.getBook(props.bookId))
+const statuses = computed(() => bookStore.fetchStatuses)
 
-watch([book, fetchStatus], () => {
-  if (!book.value && fetchStatus.value === OpStatus.SUCCESS) {
+watch([book, statuses], () => {
+  if (!book.value && statuses.value.active) {
     goToNotFound(router, route)
   }
 }, {immediate: true})
 
 const onSubmit = async (book: BookModel) => {
-  await updateBook(book)
-  addFlash({status: FlashStatus.SUCCESS, message: `Book edited`})
+  await bookStore.updateBook(book)
+  flashStore.addFlash({status: FlashStatus.SUCCESS, message: `Book edited`})
   const redirect = route.query.redirect as string
   if (!redirect) {
     await router.push({name: `books`})

@@ -14,7 +14,7 @@
         <th/>
         <th/>
         <th>
-          <input class="form-control" v-model="filter.title" :disabled="fetchStatus !== OpStatus.SUCCESS"/>
+          <input class="form-control" v-model="filter.title" :disabled="statuses.disabled"/>
         </th>
         <th>
           <div class="input-group">
@@ -22,19 +22,19 @@
               type="number"
               class="form-control"
               v-model="filter.minYear"
-              :disabled="fetchStatus !== OpStatus.SUCCESS"
+              :disabled="statuses.disabled"
             />
             <span class="input-group-text">-</span>
             <input
               type="number"
               class="form-control"
               v-model="filter.maxYear"
-              :disabled="fetchStatus !== OpStatus.SUCCESS"
+              :disabled="statuses.disabled"
             />
           </div>
         </th>
         <th>
-          <input class="form-control" v-model="filter.category" :disabled="fetchStatus !== OpStatus.SUCCESS"/>
+          <input class="form-control" v-model="filter.category" :disabled="statuses.disabled"/>
         </th>
         <th>
           <div class="input-group">
@@ -42,14 +42,14 @@
               type="number"
               class="form-control"
               v-model="filter.minPrice"
-              :disabled="fetchStatus !== OpStatus.SUCCESS"
+              :disabled="statuses.disabled"
             />
             <span class="input-group-text">-</span>
             <input
               type="number"
               class="form-control"
               v-model="filter.maxPrice"
-              :disabled="fetchStatus !== OpStatus.SUCCESS"
+              :disabled="statuses.disabled"
             />
           </div>
         </th>
@@ -57,30 +57,30 @@
       </tr>
     </thead>
 
-    <tbody v-if="fetchStatus === OpStatus.PENDING">
+    <tbody v-if="statuses.pending">
       <tr>
         <td colspan="10">Loading...</td>
       </tr>
     </tbody>
 
-    <tbody v-if="fetchStatus === OpStatus.ERROR">
+    <tbody v-if="statuses.error">
       <tr>
         <td colspan="10">Something went wrong... Please come back later!</td>
       </tr>
     </tbody>
 
-    <tbody v-if="fetchStatus === OpStatus.SUCCESS && isEmpty">
+    <tbody v-if="statuses.active && isEmpty">
       <tr>
         <td colspan="10">No books found... Please add one!</td>
       </tr>
     </tbody>
-    <tbody v-else-if="fetchStatus === OpStatus.SUCCESS && isEmptyByFilter">
+    <tbody v-else-if="statuses.active && isEmptyByFilter">
       <tr>
         <td colspan="10">No books matching your filter... Please weaken your requirements!</td>
       </tr>
     </tbody>
 
-    <tbody v-if="fetchStatus === OpStatus.SUCCESS">
+    <tbody v-if="statuses.active">
       <tr
         v-for="book of pageBooks"
         :key="book.id"
@@ -130,7 +130,7 @@
             <button
               type="button"
               class="btn btn-outline-danger action"
-              @click="removeBook(book)"
+              @click="bookStore.removeBook(book)"
             >
               &times;
             </button>
@@ -140,10 +140,10 @@
     </tbody>
 
     <TableFooter
-      v-if="fetchStatus === OpStatus.SUCCESS"
+      v-if="statuses.active"
       v-model:page="page"
       :isFiltered="isFiltered"
-      :total="allBooks.length"
+      :total="bookStore.books.length"
       :filtered="filteredBooks.length"
       :perPage="perPage"
     />
@@ -158,29 +158,27 @@ import PencilIcon from '@/assets/icons/edit.svg'
 import {useBookStore} from '@/stores/book-store'
 import type {BookFilterModel} from '@/helpers/book-types'
 import {useAuthorStore} from '@/stores/author-store'
-import {OpStatus} from '@/helpers/op-types'
 import TableFooter from '@/components/TableFooter.vue'
 import {getLatestPage, getPageItems} from '@/helpers/navigation-helpers'
 import {usePage} from '@/hooks/use-page'
 
 const router = useRouter()
 const route = useRoute()
-const {getBooks, fetchBooks, getFetchStatus, removeBook} = useBookStore()
-const {getAuthor} = useAuthorStore()
+const bookStore = useBookStore()
+const authorStore = useAuthorStore()
 
-const fetchStatus = computed(getFetchStatus)
+const statuses = computed(() => bookStore.fetchStatuses)
 const filter = ref({} as BookFilterModel)
 const isFiltered = computed(() => Object.values(filter.value).some(Boolean))
-const allBooks = computed(getBooks)
-const filteredBooks = computed(() => getBooks(filter.value))
+const filteredBooks = computed(() => bookStore.getBooks(filter.value))
 const pageBooks = computed(() => getPageItems(filteredBooks.value, page.value, perPage.value))
-const isEmpty = computed(() => allBooks.value.length === 0)
+const isEmpty = computed(() => bookStore.books.length === 0)
 const isEmptyByFilter = computed(() => filteredBooks.value.length === 0)
 const perPage = ref(5)
 const page = usePage(`books`, () => getLatestPage(filteredBooks.value.length, perPage.value))
 
 const formatAuthors = (authorIds: string[]) => {
-  const authors = authorIds.map(getAuthor)
+  const authors = authorIds.map(authorStore.getAuthor)
   if (authors.length === 0) {
     return {
       [``]: `-`,
@@ -196,7 +194,7 @@ const formatAuthors = (authorIds: string[]) => {
   }
 }
 
-onBeforeMount(fetchBooks)
+onBeforeMount(bookStore.fetchBooks)
 </script>
 
 <style lang="scss" scoped>

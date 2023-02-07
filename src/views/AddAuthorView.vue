@@ -19,12 +19,12 @@ import type {AuthorModel} from '@/helpers/author-types'
 import {FlashStatus} from '@/helpers/flash-types'
 
 const router = useRouter()
-const {addAuthor} = useAuthorStore()
-const {addFlash} = useFlashStore()
+const authorStore = useAuthorStore()
+const flashStore = useFlashStore()
 
 const onSubmit = async (author: AuthorModel) => {
-  await addAuthor(author)
-  addFlash({status: FlashStatus.SUCCESS, message: `Author added`})
+  await authorStore.addAuthor(author)
+  flashStore.addFlash({status: FlashStatus.SUCCESS, message: `Author added`})
   await router.push({name: `authors`, query: {page: -1}})
 }
 </script>

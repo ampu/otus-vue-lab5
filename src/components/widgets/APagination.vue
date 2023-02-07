@@ -129,7 +129,7 @@ watch(pagination, () => {
   if (pagination.value.page !== props.page) {
     emit(`update:page`, pagination.value.page)
   }
-})
+}, {immediate: true})
 
 const onChange = (page: number) => {
   emit(`update:page`, page)

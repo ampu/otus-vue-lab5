@@ -19,12 +19,12 @@ import type {BookModel} from '@/helpers/book-types'
 import {FlashStatus} from '@/helpers/flash-types'
 
 const router = useRouter()
-const {addBook} = useBookStore()
-const {addFlash} = useFlashStore()
+const bookStore = useBookStore()
+const flashStore = useFlashStore()
 
 const onSubmit = async (book: BookModel) => {
-  await addBook(book)
-  addFlash({status: FlashStatus.SUCCESS, message: `Book added`})
+  await bookStore.addBook(book)
+  flashStore.addFlash({status: FlashStatus.SUCCESS, message: `Book added`})
   await router.push({name: `books`, query: {page: -1}})
 
 }

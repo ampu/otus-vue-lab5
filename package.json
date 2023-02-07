@@ -1,6 +1,6 @@
 {
-  "name": "otus-vue-lab3",
-  "version": "0.0.3",
+  "name": "otus-vue-lab4",
+  "version": "0.0.4",
   "private": true,
   "scripts": {
     "start": "npm run dev",
@@ -12,7 +12,7 @@
     "test:e2e": "start-server-and-test preview :4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' :4173 'cypress open --e2e'",
     "build-only": "vite build",
-    "build-only:gh-pages": "vite build --base=/otus-vue-lab3",
+    "build-only:gh-pages": "vite build --base=/otus-vue-lab4",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },

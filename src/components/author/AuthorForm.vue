@@ -5,14 +5,14 @@
   >
     <div class="content-wrapper">
       <div
-        v-if="fetchStatus === OpStatus.PENDING"
+        v-if="statuses.pending"
         class="fetch-badge"
       >
         Loading...
       </div>
 
       <div
-        v-if="fetchStatus === OpStatus.ERROR"
+        v-if="statuses.error"
         class="fetch-badge"
       >
         Something went wrong... Please come back later!
@@ -20,7 +20,7 @@
 
       <div
         class="content"
-        :class="{active: fetchStatus === OpStatus.SUCCESS}"
+        :class="{active: statuses.active}"
       >
         <div class="mb-3">
           <label
@@ -36,7 +36,7 @@
             required
             v-focus
             v-model="author.name"
-            :disabled="fetchStatus !== OpStatus.SUCCESS"
+            :disabled="statuses.disabled"
           />
         </div>
 
@@ -47,7 +47,7 @@
             value="female"
             class="btn-check"
             v-model="author.sex"
-            :disabled="fetchStatus !== OpStatus.SUCCESS"
+            :disabled="statuses.disabled"
           />
           <label
             for="author-sex-female"
@@ -62,7 +62,7 @@
             value="male"
             class="btn-check"
             v-model="author.sex"
-            :disabled="fetchStatus !== OpStatus.SUCCESS"
+            :disabled="statuses.disabled"
           />
           <label
             for="author-sex-male"
@@ -85,7 +85,7 @@
             id="author-birth"
             class="form-control"
             v-model="author.birthday"
-            :disabled="fetchStatus !== OpStatus.SUCCESS"
+            :disabled="statuses.disabled"
           />
         </div>
 
@@ -101,7 +101,7 @@
             id="author-country"
             class="form-control"
             v-model="author.country"
-            :disabled="fetchStatus !== OpStatus.SUCCESS"
+            :disabled="statuses.disabled"
           />
         </div>
       </div>
@@ -120,7 +120,7 @@
         type="reset"
         class="btn btn-danger me-auto d-flex align-items-center gap-1"
         @click.prevent="onReset"
-        :disabled="fetchStatus !== OpStatus.SUCCESS"
+        :disabled="statuses.disabled"
       >
         <ResetIcon/>
         Reset
@@ -128,7 +128,7 @@
       <button
         type="submit"
         class="btn btn-primary d-flex align-items-center gap-1"
-        :disabled="fetchStatus !== OpStatus.SUCCESS"
+        :disabled="statuses.disabled"
       >
         <slot>Submit</slot>
       </button>
@@ -148,20 +148,19 @@ import ReturnIcon from '@/assets/icons/return.svg'
 
 import type {AuthorModel} from '@/helpers/author-types'
 import {useBookStore} from '@/stores/book-store'
-import {OpStatus} from '@/helpers/op-types'
 
 const props = defineProps<{
   modelValue?: AuthorModel
 }>()
 
 const emit = defineEmits<{
-  (e: `update:model-value`, author: AuthorModel): void
+  (e: `update:modelValue`, author: AuthorModel): void
 }>()
 
 const router = useRouter()
 const author = ref({} as AuthorModel)
-const {fetchBooks, getFetchStatus} = useBookStore()
-const fetchStatus = computed(getFetchStatus)
+const bookStore = useBookStore()
+const statuses = computed(() => bookStore.fetchStatuses)
 
 const onReset = () => {
   author.value = {} as AuthorModel
@@ -172,12 +171,12 @@ const onReset = () => {
 }
 
 const onSubmit = () => {
-  emit(`update:model-value`, {...author.value})
+  emit(`update:modelValue`, {...author.value})
 }
 
 watch(props, onReset, {immediate: true})
 
-onBeforeMount(fetchBooks)
+onBeforeMount(bookStore.fetchBooks)
 </script>
 
 <style lang="scss" scoped>

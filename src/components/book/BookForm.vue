@@ -4,11 +4,11 @@
     @submit.prevent="onSubmit"
   >
     <div class="content-wrapper">
-      <div v-if="fetchStatus === OpStatus.PENDING" class="fetch-badge">Loading...</div>
-      <div v-if="fetchStatus === OpStatus.ERROR" class="fetch-badge">Something went wrong... Please come back later!</div>
+      <div v-if="statuses.pending" class="fetch-badge">Loading...</div>
+      <div v-if="statuses.error" class="fetch-badge">Something went wrong... Please come back later!</div>
       <div
         class="content"
-        :class="{active: fetchStatus === OpStatus.SUCCESS}"
+        :class="{active: statuses.active}"
       >
         <div class="mb-3 d-flex gap-4">
           <BookPosterOutput
@@ -22,14 +22,14 @@
             <BookTitleInput
               class="mb-3"
               v-model="book.title"
-              :disabled="disabled"
+              :disabled="statuses.disabled"
             />
 
             <BookPosterInput
               class="mb-3"
               v-model="book.posterUrl"
               :placeholder="IMAGE_PLACEHOLDER"
-              :disabled="disabled"
+              :disabled="statuses.disabled"
               @update:proxy="syncPosterUrl"
             />
           </div>
@@ -38,46 +38,46 @@
         <BookAuthorsInput
           class="mb-3"
           v-model="book.authorIds"
-          :disabled="disabled"
+          :disabled="statuses.disabled"
         />
 
         <div class="row mb-3">
           <BookIsbnInput
             class="col"
             v-model="book.isbn"
-            :disabled="disabled"
+            :disabled="statuses.disabled"
           />
 
           <BookYearInput
             class="col"
             v-model="book.year"
-            :disabled="disabled"
+            :disabled="statuses.disabled"
           />
         </div>
 
         <BookDescriptionInput
           class="mb-3"
           v-model="book.description"
-          :disabled="disabled"
+          :disabled="statuses.disabled"
         />
 
         <BookTagsInput
           class="mb-3"
           v-model="book.tags"
-          :disabled="disabled"
+          :disabled="statuses.disabled"
         />
 
         <div class="row mb-3">
           <BookCategoryInput
             class="col"
             v-model="book.category"
-            :disabled="disabled"
+            :disabled="statuses.disabled"
           />
 
           <BookPriceInput
             class="col"
             v-model="book.price"
-            :disabled="disabled"
+            :disabled="statuses.disabled"
           />
         </div>
       </div>
@@ -96,7 +96,7 @@
         type="reset"
         class="btn btn-danger me-auto d-flex align-items-center gap-1"
         @click.prevent="onReset"
-        :disabled="disabled"
+        :disabled="statuses.disabled"
       >
         <ResetIcon/>
         Reset
@@ -104,7 +104,7 @@
       <button
         type="submit"
         class="btn btn-primary d-flex align-items-center gap-1"
-        :disabled="disabled"
+        :disabled="statuses.disabled"
       >
         <slot>Submit</slot>
       </button>
@@ -132,11 +132,7 @@ import BookPosterOutput from '@/components/book/outputs/BookPosterOutput.vue'
 import type {BookModel} from '@/helpers/book-types'
 import {useBookStore} from '@/stores/book-store'
 import {useRouter} from 'vue-router'
-import {OpStatus} from '@/helpers/op-types'
 import {SET_FILTER} from '@/helpers/collection-helpers'
-
-const router = useRouter()
-const {fetchBooks, getFetchStatus} = useBookStore()
 
 const IMAGE_PLACEHOLDER = `https://via.placeholder.com/128x180`
 
@@ -145,8 +141,11 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: `update:model-value`, book: BookModel): void
+  (e: `update:modelValue`, book: BookModel): void
 }>()
+
+const router = useRouter()
+const bookStore = useBookStore()
 
 const createBook = (): BookModel => ({
   id: nanoid(),
@@ -156,8 +155,7 @@ const createBook = (): BookModel => ({
   category: ``
 })
 
-const fetchStatus = computed(getFetchStatus)
-const disabled = computed(() => fetchStatus.value !== OpStatus.SUCCESS)
+const statuses = computed(() => bookStore.fetchStatuses)
 const book = ref(createBook())
 const posterUrl = computed(() => book.value.posterUrl)
 const isPosterOk = ref(true)
@@ -176,7 +174,7 @@ const onSubmit = () => {
   syncPosterUrl.flush()
   book.value.authorIds = book.value.authorIds.filter(Boolean).filter(SET_FILTER)
 
-  emit(`update:model-value`, {...book.value})
+  emit(`update:modelValue`, {...book.value})
 }
 
 watch(props, onReset, {immediate: true})
@@ -185,7 +183,7 @@ watch(posterUrl, () => {
   isPosterOk.value = !!posterUrl.value
 }, {immediate: true})
 
-onBeforeMount(fetchBooks)
+onBeforeMount(bookStore.fetchBooks)
 </script>
 
 <style lang="scss" scoped>

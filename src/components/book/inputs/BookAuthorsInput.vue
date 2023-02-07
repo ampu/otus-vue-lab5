@@ -16,7 +16,7 @@
       >
         <option disabled>-- select one --</option>
         <option
-          v-for="author of authors"
+          v-for="author of authorStore.authors"
           :key="author.id"
           :value="author.id"
         >
@@ -54,12 +54,11 @@ const props = defineProps<{
   disabled: boolean,
 }>()
 
-const {getAuthors} = useAuthorStore()
-const authors = computed(getAuthors)
-
 const emit = defineEmits<{
   (event: `update:modelValue`, value: string[]): void
 }>()
+
+const authorStore = useAuthorStore()
 
 const value = computed({
   get: () => props.modelValue,
@@ -80,5 +79,4 @@ const removeAuthor = (authorOrder: number) => {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

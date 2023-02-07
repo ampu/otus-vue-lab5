@@ -10,8 +10,6 @@ const SCHEDULER_INTERVAL = 1000
 export const useFlashStore = defineStore(`flash`, () => {
   const flashes = ref([] as FlashModel[])
 
-  const getFlashes = () => flashes.value
-
   const addFlash = ({
     status,
     message,
@@ -47,7 +45,6 @@ export const useFlashStore = defineStore(`flash`, () => {
 
   return {
     flashes,
-    getFlashes,
     addFlash,
     removeFlash,
   }
