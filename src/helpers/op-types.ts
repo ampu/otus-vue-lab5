@@ -5,7 +5,14 @@ export const enum OpStatus {
   PENDING = 'PENDING',
 }
 
-export const getStatuses = (status: OpStatus) => {
+export interface OpStatuses {
+  disabled: boolean
+  active: boolean
+  pending: boolean
+  error: boolean
+}
+
+export const getStatuses = (status: OpStatus): OpStatuses => {
   return {
     disabled: status !== OpStatus.SUCCESS,
     active: status === OpStatus.SUCCESS,

@@ -1,6 +1,10 @@
 import _ from 'lodash'
 import type {RouteLocationNormalizedLoaded, Router} from 'vue-router'
 
+export const sleep = async (ms?: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export const goToFullPath = async (router: Router, fullPath: string) => {
   const url = new URL(fullPath, location.href)
   await router.push({path: url.pathname, query: Object.fromEntries(url.searchParams), hash: url.hash})

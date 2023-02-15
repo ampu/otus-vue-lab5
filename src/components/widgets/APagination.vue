@@ -5,6 +5,7 @@
   >
     <li v-if="pagination.previousPage">
       <a
+        data-testid="pagination-page"
         class="APagination__link"
         rel="prev"
         href="#"
@@ -14,17 +15,34 @@
       </a>
     </li>
     <li v-else class="APagination__page disabled">
-      <span class="APagination__link">
+      <span
+        data-testid="pagination-page"
+        class="APagination__link"
+      >
         &laquo;&nbsp;{{ translation.previous }}
       </span>
     </li>
 
 
     <li v-if="pagination.startPage > 1" class="APagination__page">
-      <a class="APagination__link" href="#" @click.stop.prevent="onChange(1)">1</a>
+      <a
+        data-testid="pagination-page"
+        class="APagination__link"
+        href="#"
+        @click.stop.prevent="onChange(1)"
+      >
+        1
+      </a>
     </li>
     <li v-if="pagination.startPage === 3" class="APagination__page">
-      <a class="APagination__link" href="#" @click.stop.prevent="onChange(2)">2</a>
+      <a
+        data-testid="pagination-page"
+        class="APagination__link"
+        href="#"
+        @click.stop.prevent="onChange(2)"
+      >
+        2
+      </a>
     </li>
     <li v-else-if="pagination.startPage > 3" class="APagination__page disabled">
       <span class="APagination__link">&hellip;</span>
@@ -40,11 +58,13 @@
     >
       <span
         v-if="aPage === pagination.page"
+        data-testid="pagination-page"
         class="APagination__link"
         v-text="aPage"
       />
       <a
         v-else
+        data-testid="pagination-page"
         class="APagination__link"
         href="#"
         @click.stop.prevent="onChange(aPage)"
@@ -58,6 +78,7 @@
     </li>
     <li v-else-if="pagination.totalPages > pagination.endPage + 1" class="APagination__page">
       <a
+        data-testid="pagination-page"
         class="APagination__link"
         href="#"
         @click.stop.prevent="onChange(pagination.totalPages - 1)"
@@ -67,6 +88,7 @@
 
     <li v-if="pagination.totalPages > pagination.endPage">
       <a
+        data-testid="pagination-page"
         class="APagination__link"
         href="#"
         @click.stop.prevent="onChange(pagination.totalPages)"
@@ -77,6 +99,7 @@
 
     <li v-if="pagination.nextPage">
       <a
+        data-testid="pagination-page"
         class="APagination__link"
         rel="next"
         href="#"
@@ -86,7 +109,12 @@
       </a>
     </li>
     <li v-else class="APagination__page disabled">
-      <span class="APagination__link">{{ translation.next }}&nbsp;&raquo;</span>
+      <span
+        data-testid="pagination-page"
+        class="APagination__link"
+      >
+        {{ translation.next }}&nbsp;&raquo;
+      </span>
     </li>
   </ul>
 </template>

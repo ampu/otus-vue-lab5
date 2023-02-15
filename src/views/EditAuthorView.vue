@@ -5,7 +5,7 @@
       :modelValue="author"
       @update:modelValue="onSubmit"
     >
-      <EditIcon/>
+      <component :is="EditIcon"/>
       Edit
     </AuthorForm>
   </div>

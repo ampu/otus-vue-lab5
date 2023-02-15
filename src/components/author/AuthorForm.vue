@@ -1,5 +1,6 @@
 <template>
   <form
+    data-testid="author-form"
     class="AuthorForm"
     @submit.prevent="onSubmit"
   >
@@ -30,6 +31,7 @@
             Name
           </label>
           <input
+            data-testid="author-name"
             type="text"
             id="author-name"
             class="form-control"
@@ -42,6 +44,7 @@
 
         <div class="mb-3 btn-group">
           <input
+            data-testid="author-sex-female"
             type="radio"
             id="author-sex-female"
             value="female"
@@ -53,10 +56,11 @@
             for="author-sex-female"
             class="btn btn-outline-primary d-flex align-items-center gap-1"
           >
-            <FemaleIcon/>
+            <component :is="FemaleIcon"/>
             Female
           </label>
           <input
+            data-testid="author-sex-male"
             type="radio"
             id="author-sex-male"
             value="male"
@@ -68,7 +72,7 @@
             for="author-sex-male"
             class="btn btn-outline-primary d-flex align-items-center gap-1"
           >
-            <MaleIcon/>
+            <component :is="MaleIcon"/>
             Male
           </label>
         </div>
@@ -81,6 +85,7 @@
             Birthday
           </label>
           <input
+            data-testid="author-birth"
             type="date"
             id="author-birth"
             class="form-control"
@@ -97,6 +102,7 @@
             Country
           </label>
           <input
+            data-testid="author-country"
             type="text"
             id="author-country"
             class="form-control"
@@ -109,23 +115,26 @@
 
     <div class="mt-4 mb-3 d-flex justify-content-between gap-2">
       <button
+        data-testid="author-back"
         type="button"
         class="btn btn-secondary d-flex align-items-center gap-1"
         @click="router.back()"
       >
-        <ReturnIcon/>
+        <component :is="ReturnIcon"/>
         Back
       </button>
       <button
+        data-testid="author-reset"
         type="reset"
         class="btn btn-danger me-auto d-flex align-items-center gap-1"
         @click.prevent="onReset"
         :disabled="statuses.disabled"
       >
-        <ResetIcon/>
+        <component :is="ResetIcon"/>
         Reset
       </button>
       <button
+        data-testid="author-submit"
         type="submit"
         class="btn btn-primary d-flex align-items-center gap-1"
         :disabled="statuses.disabled"

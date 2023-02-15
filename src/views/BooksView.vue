@@ -1,28 +1,29 @@
 <template>
   <div>
     <h1 class="mb-3">
-      <BooksIcon/>
+      <component :is="BooksIcon"/>
       Books
     </h1>
 
     <div class="mb-3 d-flex flex-wrap">
       <RouterLink
+        data-testid="book-add"
         :to="{name: `books-add`}"
         class="btn btn-primary d-flex align-items-center gap-1"
       >
-        <AddIcon/>
+        <component :is="AddIcon"/>
         New Book
       </RouterLink>
     </div>
 
-    <BookList/>
+    <BookTable/>
   </div>
 </template>
 
 <script setup lang="ts">
 import AddIcon from '@/assets/icons/add.svg'
 import BooksIcon from '@/assets/icons/books.svg'
-import BookList from '@/components/book/BookList.vue'
+import BookTable from '@/components/book/BookTable.vue'
 </script>
 
 <style lang="scss" scoped>

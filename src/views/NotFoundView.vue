@@ -7,14 +7,14 @@
           class="btn link nav-link"
           @click="router.back()"
         >
-          <BackIcon/>
+          <component :is="BackIcon"/>
           Back
         </button>
         <RouterLink
           :to="{ name: `home` }"
           class="link nav-link"
         >
-          <HomeIcon/>
+          <component :is="HomeIcon"/>
           Home
         </RouterLink>
       </div>

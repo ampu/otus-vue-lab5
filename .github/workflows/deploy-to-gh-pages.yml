@@ -8,9 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: npm ci && npm test && npm run build-only:gh-pages
+      - run: npm ci && npm run test:unit:gh-pages && npm run build-only:gh-pages
 
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: build
+
+      - run: npm run test:e2e:gh-pages

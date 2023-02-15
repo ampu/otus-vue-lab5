@@ -37,7 +37,7 @@
       class="btn btn-primary"
       @click="addAuthor"
     >
-      <AddIcon/>
+      <component :is="AddIcon"/>
       Add Author
     </button>
   </div>

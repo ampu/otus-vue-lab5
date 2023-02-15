@@ -5,7 +5,7 @@
       :modelValue="book"
       @update:modelValue="onSubmit"
     >
-      <EditIcon/>
+      <component :is="EditIcon"/>
       Edit
     </BookForm>
   </div>

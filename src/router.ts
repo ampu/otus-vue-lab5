@@ -14,10 +14,11 @@ const routes = [
     name: `home`,
     component: HomeView
   },
+  // books
   {
     path: `/books`,
     name: `books`,
-    component: () => import(/* webpackChunkName: "books" */ '@/views/BookListView.vue')
+    component: () => import(/* webpackChunkName: "books" */ '@/views/BooksView.vue')
   },
   {
     path: `/books/add`,
@@ -30,10 +31,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "books-edit" */ '@/views/EditBookView.vue'),
     props: true,
   },
+  // authors
   {
     path: `/authors`,
     name: `authors`,
-    component: () => import(/* webpackChunkName: "authors" */ '@/views/AuthorListView.vue')
+    component: () => import(/* webpackChunkName: "authors" */ '@/views/AuthorsView.vue')
   },
   {
     path: `/authors/add`,

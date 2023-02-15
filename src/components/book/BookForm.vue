@@ -85,20 +85,22 @@
 
     <div class="mt-4 mb-3 d-flex justify-content-between gap-2">
       <button
+        data-testid="book-back"
         type="button"
         class="btn btn-secondary d-flex align-items-center gap-1"
         @click="router.back()"
       >
-        <ReturnIcon/>
+        <component :is="ReturnIcon"/>
         Back
       </button>
       <button
+        data-testid="book-reset"
         type="reset"
         class="btn btn-danger me-auto d-flex align-items-center gap-1"
-        @click.prevent="onReset"
         :disabled="statuses.disabled"
+        @click.prevent="onReset"
       >
-        <ResetIcon/>
+        <component :is="ResetIcon"/>
         Reset
       </button>
       <button

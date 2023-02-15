@@ -10,7 +10,7 @@ const getRoutePageForGetter = (route: RouteLocation) => {
 }
 
 const getRoutePageForSetter = (page: number) => {
-  return page <= 1 ? undefined : page
+  return page <= 1 ? undefined : String(page)
 }
 
 export const usePage = (routeName: string, getLatestPage: () => number) => {

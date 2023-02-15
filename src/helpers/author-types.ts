@@ -2,7 +2,7 @@ export interface AuthorModel {
   id: string
   name: string
   birthday?: string
-  sex?: string
+  sex?: `male` | `female`
   country?: string
 }
 

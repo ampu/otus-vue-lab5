@@ -7,6 +7,7 @@
       Title
     </label>
     <input
+      data-testid="book-title"
       type="text"
       id="book-title"
       class="form-control"

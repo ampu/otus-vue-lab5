@@ -21,7 +21,7 @@
         for="book-poster-file"
         class="btn btn-primary d-flex align-items-center gap-1"
       >
-        <UploadIcon/>
+        <component :is="UploadIcon"/>
         Upload
       </label>
     </div>

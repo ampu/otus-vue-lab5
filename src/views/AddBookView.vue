@@ -2,7 +2,7 @@
   <div>
     <h1>New Book</h1>
     <BookForm @update:modelValue="onSubmit">
-      <AddIcon/>
+      <component :is="AddIcon"/>
       Add
     </BookForm>
   </div>

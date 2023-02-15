@@ -1,0 +1,17 @@
+// Vitest Snapshot v1
+
+exports[`HomeView > mounts without error 1`] = `
+"<main data-v-c3e9f06f=\\"\\" class=\\"h-100 d-flex flex-column justify-content-center align-items-center mb-5\\">
+  <div data-v-c3e9f06f=\\"\\" class=\\"d-flex flex-column justify-content-center align-items-center mb-5\\">
+    <h1 data-v-c3e9f06f=\\"\\" class=\\"m-5\\">Bookstore «Gallery»</h1>
+    <ul data-v-c3e9f06f=\\"\\" class=\\"links d-flex align-items-center gap-5\\">
+      <li data-v-c3e9f06f=\\"\\">
+        <router-link-stub data-v-c3e9f06f=\\"\\" to=\\"[object Object]\\" replace=\\"false\\" custom=\\"false\\" ariacurrentvalue=\\"page\\" data-testid=\\"home-books\\" class=\\"link nav-link\\"></router-link-stub>
+      </li>
+      <li data-v-c3e9f06f=\\"\\">
+        <router-link-stub data-v-c3e9f06f=\\"\\" to=\\"[object Object]\\" replace=\\"false\\" custom=\\"false\\" ariacurrentvalue=\\"page\\" data-testid=\\"home-authors\\" class=\\"link nav-link\\"></router-link-stub>
+      </li>
+    </ul>
+  </div>
+</main>"
+`;

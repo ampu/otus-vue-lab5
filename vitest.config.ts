@@ -1,11 +1,9 @@
 import {fileURLToPath, URL} from 'node:url'
-
-import {defineConfig} from 'vite'
+import {configDefaults, defineConfig} from 'vitest/config'
 import svgLoader from 'vite-svg-loader'
 // @ts-ignore
 import veauryVitePlugins from 'veaury/vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     veauryVitePlugins({
@@ -18,14 +16,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  build: {
-    outDir: `build`,
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@import "@/assets/mixins";',
-      },
-    },
+  root: `src`,
+  test: {
+    globals: true,
+    environment: `jsdom`,
+    exclude: [...configDefaults.exclude, `**/e2e/**`],
+    setupFiles: [`setup-tests.ts`],
   },
 })

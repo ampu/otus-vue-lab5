@@ -2,7 +2,7 @@
   <div>
     <h1>New Author</h1>
     <AuthorForm @update:modelValue="onSubmit">
-      <AddIcon/>
+      <component :is="AddIcon"/>
       Add
     </AuthorForm>
   </div>
