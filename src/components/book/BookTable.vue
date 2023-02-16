@@ -20,7 +20,7 @@
         v-if="statuses.active"
         :key="page"
       >
-        <BookRow
+        <BookTableRow
           v-for="book of pageBooks"
           :key="book.id"
           :book="book"
@@ -30,11 +30,11 @@
 
     <TableFooter
       v-if="statuses.active"
-      v-model:page="page"
       :isFiltered="isFiltered"
       :total="bookStore.books.length"
       :filtered="filteredBooks.length"
       :perPage="perPage"
+      v-model:page="page"
     />
   </table>
 </template>
@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import {onBeforeMount, computed, ref} from 'vue'
 
-import BookRow from '@/components/book/BookTableRow.vue'
+import BookTableRow from '@/components/book/BookTableRow.vue'
 import TableStatuses from '@/components/TableStatuses.vue'
 import BookTableHeader from '@/components/book/BookTableHeader.vue'
 import BookFilter from '@/components/book/BookFilter.vue'

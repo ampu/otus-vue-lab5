@@ -67,7 +67,7 @@ const emit = defineEmits<{
   (event: `update:modelValue`, value: BookFilterModel): void
 }>()
 
-const computeFilter = (key: keyof BookFilterModel) => {
+const useFilterValue = (key: keyof BookFilterModel) => {
   return computed({
     get: () => props.modelValue[key],
     set(value) {
@@ -76,12 +76,12 @@ const computeFilter = (key: keyof BookFilterModel) => {
   })
 }
 
-const title = computeFilter(`title`)
-const minYear = computeFilter(`minYear`)
-const maxYear = computeFilter(`maxYear`)
-const category = computeFilter(`category`)
-const minPrice = computeFilter(`minPrice`)
-const maxPrice = computeFilter(`maxPrice`)
+const title = useFilterValue(`title`)
+const minYear = useFilterValue(`minYear`)
+const maxYear = useFilterValue(`maxYear`)
+const category = useFilterValue(`category`)
+const minPrice = useFilterValue(`minPrice`)
+const maxPrice = useFilterValue(`maxPrice`)
 </script>
 
 <style lang="scss" scoped>

@@ -1,11 +1,14 @@
 {
-  "name": "otus-vue-lab4",
-  "version": "0.0.4",
+  "name": "otus-vue-lab5",
+  "version": "0.0.5",
   "private": true,
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
     "build": "run-p type-check build-only",
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "preview": "vite preview",
     "test": "npm run test:unit -- --run && CI=1 npm run test:e2e -- -x",
     "test:unit": "vitest",
@@ -14,11 +17,9 @@
     "report:e2e": "playwright show-report",
     "codegen:e2e": "playwright codegen localhost:5173",
     "build-only": "vite build",
-    "build-only:gh-pages": "vite build --base=/otus-vue-lab4",
-    "test:unit:gh-pages": "CI=1 BASE=/otus-vue-lab4 npm run test:unit -- --run",
-    "test:e2e:gh-pages": "playwright install && CI=1 BASE=https://ampu.github.io/otus-vue-lab4 npm run test:e2e -- -x",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "build-only:gh-pages": "vite build --base=/otus-vue-lab5",
+    "test:unit:gh-pages": "CI=1 vitest --run",
+    "test:e2e:gh-pages": "vite build && playwright install --with-deps && CI=1 playwright test -x"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
@@ -45,7 +46,7 @@
     "@vitest/coverage-c8": "^0.28.4",
     "@vitest/ui": "^0.28.5",
     "@vue/eslint-config-typescript": "^11.0.0",
-    "@vue/test-utils": "^2.2.6",
+    "@vue/test-utils": "^2.2.10",
     "@vue/tsconfig": "^0.1.3",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",

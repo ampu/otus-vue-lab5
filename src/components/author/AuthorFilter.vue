@@ -31,7 +31,7 @@ const emit = defineEmits<{
   (event: `update:modelValue`, value: AuthorFilterModel): void
 }>()
 
-const computeFilter = (key: keyof AuthorFilterModel) => {
+const useFilterValue = (key: keyof AuthorFilterModel) => {
   return computed({
     get: () => props.modelValue[key],
     set(value) {
@@ -40,10 +40,9 @@ const computeFilter = (key: keyof AuthorFilterModel) => {
   })
 }
 
-const name = computeFilter(`name`)
-const country = computeFilter(`country`)
+const name = useFilterValue(`name`)
+const country = useFilterValue(`country`)
 </script>
 
 <style lang="scss" scoped>
-
 </style>

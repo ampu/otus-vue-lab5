@@ -1,0 +1,42 @@
+// Vitest Snapshot v1
+
+exports[`AuthorTable > navigates to pages 1`] = `
+[
+  "Author #6-",
+  "Author #7Israel",
+]
+`;
+
+exports[`AuthorTable > renders by default 1`] = `
+"<table class=\\"table table-striped align-middle text-center\\">
+  <thead>
+    <tr class=\\"title\\">
+      <th>Name</th>
+      <th>Country</th>
+      <th style=\\"width: 58px;\\"></th>
+    </tr>
+    <tr>
+      <th><input class=\\"form-control\\" disabled=\\"\\"></th>
+      <th><input class=\\"form-control\\" disabled=\\"\\"></th>
+      <th></th>
+    </tr>
+  </thead>
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+  <transition-stub name=\\"fade\\" mode=\\"out-in\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+    <!--v-if-->
+  </transition-stub>
+  <!--v-if-->
+</table>"
+`;
+
+exports[`AuthorTable > renders list 1`] = `
+[
+  "Author #1-",
+  "Author #2-",
+  "Author #3Germany",
+  "Author #4-",
+  "Author #5Poland",
+]
+`;

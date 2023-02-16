@@ -30,11 +30,11 @@
 
     <TableFooter
       v-if="statuses.active"
-      v-model:page="page"
       :isFiltered="isFiltered"
       :total="authorStore.authors.length"
       :filtered="filteredAuthors.length"
       :perPage="perPage"
+      v-model:page="page"
     />
   </table>
 </template>
