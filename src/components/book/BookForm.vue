@@ -131,10 +131,10 @@ import BookCategoryInput from '@/components/book/inputs/BookCategoryInput.vue'
 import BookTagsInput from '@/components/book/inputs/BookTagsInput.vue'
 import BookDescriptionInput from '@/components/book/inputs/BookDescriptionInput.vue'
 import BookPosterOutput from '@/components/book/outputs/BookPosterOutput.vue'
-import type {BookModel} from '@/helpers/book-types'
+import type {BookModel} from '@/utils/book-types'
 import {useBookStore} from '@/stores/book-store'
 import {useRouter} from 'vue-router'
-import {SET_FILTER} from '@/helpers/collection-helpers'
+import {SET_FILTER} from '@/utils/collection-helpers'
 
 const IMAGE_PLACEHOLDER = `https://via.placeholder.com/128x180`
 

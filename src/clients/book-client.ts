@@ -1,5 +1,5 @@
-import type {BookModel} from '@/helpers/book-types'
-import type {AuthorModel} from '@/helpers/author-types'
+import type {BookModel} from '@/utils/book-types'
+import type {AuthorModel} from '@/utils/author-types'
 
 const BookEndpoint = {
   GET_BOOKS: `https://www.googleapis.com/books/v1/volumes`,

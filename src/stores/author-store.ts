@@ -1,7 +1,7 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
 
-import type {AuthorFilterModel, AuthorModel} from '@/helpers/author-types'
+import type {AuthorFilterModel, AuthorModel} from '@/utils/author-types'
 
 export const useAuthorStore = defineStore(`author`, () => {
   const authors = ref([] as AuthorModel[])

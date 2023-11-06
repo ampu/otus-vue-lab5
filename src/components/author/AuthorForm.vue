@@ -155,7 +155,7 @@ import FemaleIcon from '@/assets/icons/female.svg'
 import ResetIcon from '@/assets/icons/reset.svg'
 import ReturnIcon from '@/assets/icons/return.svg'
 
-import type {AuthorModel} from '@/helpers/author-types'
+import type {AuthorModel} from '@/utils/author-types'
 import {useBookStore} from '@/stores/book-store'
 
 const props = defineProps<{

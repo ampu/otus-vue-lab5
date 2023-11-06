@@ -15,8 +15,8 @@ import AddIcon from '@/assets/icons/add.svg'
 import AuthorForm from '@/components/author/AuthorForm.vue'
 import {useAuthorStore} from '@/stores/author-store'
 import {useFlashStore} from '@/stores/flash-store'
-import type {AuthorModel} from '@/helpers/author-types'
-import {FlashStatus} from '@/helpers/flash-types'
+import type {AuthorModel} from '@/utils/author-types'
+import {FlashStatus} from '@/utils/flash-types'
 
 const router = useRouter()
 const authorStore = useAuthorStore()

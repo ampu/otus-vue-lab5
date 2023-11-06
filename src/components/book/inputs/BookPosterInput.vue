@@ -40,7 +40,7 @@
 import {computed, ref, watch} from 'vue'
 
 import UploadIcon from '@/assets/icons/upload.svg'
-import {fileToBase64} from '@/helpers/file-helpers'
+import {fileToBase64} from '@/utils/file-helpers'
 
 const props = defineProps<{
   modelValue?: string,

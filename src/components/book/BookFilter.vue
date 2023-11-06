@@ -56,7 +56,7 @@
 
 <script lang="ts" setup>
 import {computed} from 'vue'
-import {BookFilterModel} from '@/helpers/book-types'
+import {BookFilterModel} from '@/utils/book-types'
 
 const props = defineProps<{
   disabled: boolean

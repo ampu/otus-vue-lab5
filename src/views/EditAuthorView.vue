@@ -18,11 +18,11 @@ import EditIcon from '@/assets/icons/edit.svg'
 import AuthorForm from '@/components/author/AuthorForm.vue'
 import {useAuthorStore} from '@/stores/author-store'
 import {useRouter, useRoute} from 'vue-router'
-import type {AuthorModel} from '@/helpers/author-types'
+import type {AuthorModel} from '@/utils/author-types'
 import {useBookStore} from '@/stores/book-store'
 import {useFlashStore} from '@/stores/flash-store'
-import {goToFullPath, goToNotFound} from '@/helpers/navigation-helpers'
-import {FlashStatus} from '@/helpers/flash-types'
+import {goToFullPath, goToNotFound} from '@/utils/navigation-helpers'
+import {FlashStatus} from '@/utils/flash-types'
 
 const props = defineProps<{
   authorId: string

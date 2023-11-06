@@ -64,7 +64,7 @@ import {useRoute, useRouter} from 'vue-router'
 
 import PencilIcon from '@/assets/icons/edit.svg'
 
-import {BookModel} from '@/helpers/book-types'
+import {BookModel} from '@/utils/book-types'
 import {useBookStore} from '@/stores/book-store'
 import {useAuthorStore} from '@/stores/author-store'
 

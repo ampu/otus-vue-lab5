@@ -26,7 +26,7 @@ import {useRoute, useRouter} from 'vue-router'
 
 import PencilIcon from '@/assets/icons/edit.svg'
 
-import {AuthorModel} from '@/helpers/author-types'
+import {AuthorModel} from '@/utils/author-types'
 
 const props = defineProps<{
   author: AuthorModel

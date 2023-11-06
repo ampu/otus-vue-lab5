@@ -15,8 +15,8 @@ import AddIcon from '@/assets/icons/add.svg'
 import BookForm from '@/components/book/BookForm.vue'
 import {useBookStore} from '@/stores/book-store'
 import {useFlashStore} from '@/stores/flash-store'
-import type {BookModel} from '@/helpers/book-types'
-import {FlashStatus} from '@/helpers/flash-types'
+import type {BookModel} from '@/utils/book-types'
+import {FlashStatus} from '@/utils/flash-types'
 
 const router = useRouter()
 const bookStore = useBookStore()

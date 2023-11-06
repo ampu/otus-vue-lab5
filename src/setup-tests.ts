@@ -1,3 +1,3 @@
-import {stubScrollTo} from '@/helpers/test-helpers'
+import {stubScrollTo} from '@/utils/test-helpers'
 
 stubScrollTo()

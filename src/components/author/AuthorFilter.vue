@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import {AuthorFilterModel} from '@/helpers/author-types'
+import {AuthorFilterModel} from '@/utils/author-types'
 import {computed} from 'vue'
 
 const props = defineProps<{

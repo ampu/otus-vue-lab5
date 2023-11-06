@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import {OpStatuses} from '@/helpers/op-types'
+import {OpStatuses} from '@/utils/op-types'
 import {computed} from 'vue'
 
 const DEFAULT_COLSPAN = 10

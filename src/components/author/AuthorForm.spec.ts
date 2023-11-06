@@ -4,10 +4,10 @@ import {createTestingPinia} from '@pinia/testing'
 
 import router from '@/router'
 import AuthorForm from '@/components/author/AuthorForm.vue'
-import {AuthorModel} from '@/helpers/author-types'
+import {AuthorModel} from '@/utils/author-types'
 import FocusDirective from '@/directives/focus-directive'
-import {OpStatus} from '@/helpers/op-types'
-import {expectToHaveDisabledAttribute} from '@/helpers/test-helpers'
+import {OpStatus} from '@/utils/op-types'
+import {expectToHaveDisabledAttribute} from '@/utils/test-helpers'
 
 describe(`AuthorForm`, () => {
   const mountComponent = (

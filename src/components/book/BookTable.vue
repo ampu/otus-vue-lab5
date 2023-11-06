@@ -48,10 +48,10 @@ import BookTableHeader from '@/components/book/BookTableHeader.vue'
 import BookFilter from '@/components/book/BookFilter.vue'
 
 import {useBookStore} from '@/stores/book-store'
-import {BookFilterModel} from '@/helpers/book-types'
+import {BookFilterModel} from '@/utils/book-types'
 import TableFooter from '@/components/TableFooter.vue'
-import {getLatestPage, getPageItems} from '@/helpers/navigation-helpers'
-import {usePage} from '@/hooks/use-page'
+import {getLatestPage, getPageItems} from '@/utils/navigation-helpers'
+import {usePage} from '@/composables/use-page'
 
 const bookStore = useBookStore()
 

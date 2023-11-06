@@ -1,10 +1,10 @@
 import {computed, ref} from 'vue'
 import {defineStore} from 'pinia'
 
-import type {BookFilterModel, BookModel} from '@/helpers/book-types'
+import type {BookFilterModel, BookModel} from '@/utils/book-types'
 import bookClient from '@/clients/book-client'
 import {useAuthorStore} from '@/stores/author-store'
-import {getStatuses, OpStatus} from '@/helpers/op-types'
+import {getStatuses, OpStatus} from '@/utils/op-types'
 
 export const useBookStore = defineStore(`book`, () => {
   const fetchStatus = ref(OpStatus.NONE)

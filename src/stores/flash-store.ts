@@ -2,7 +2,7 @@ import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import {nanoid} from 'nanoid'
 
-import type {FlashModel, FlashStatus} from '@/helpers/flash-types'
+import type {FlashModel, FlashStatus} from '@/utils/flash-types'
 
 const DEFAULT_TIMEOUT = 3000
 const SCHEDULER_INTERVAL = 1000

@@ -122,7 +122,7 @@
 <script setup lang="ts">
 import {computed, watch} from 'vue'
 
-import {createPagination} from '@/helpers/navigation-helpers'
+import {createPagination} from '@/utils/navigation-helpers'
 
 const TRANSLATIONS = {
   en: {

@@ -2,12 +2,12 @@ import {describe, it, expect, vi, afterEach} from 'vitest'
 import {mount} from '@vue/test-utils'
 
 import AuthorTable from '@/components/author/AuthorTable.vue'
-import {AuthorModel} from '@/helpers/author-types'
+import {AuthorModel} from '@/utils/author-types'
 import {createTestingPinia} from '@pinia/testing'
 import router from '@/router'
 import {useBookStore} from '@/stores/book-store'
-import {OpStatus} from '@/helpers/op-types'
-import {clickAndExpectRouterPush} from '@/helpers/test-helpers'
+import {OpStatus} from '@/utils/op-types'
+import {clickAndExpectRouterPush} from '@/utils/test-helpers'
 
 describe(`AuthorTable`, () => {
   const ITEMS: AuthorModel[] = [
